@@ -7,7 +7,7 @@ use ExtUtils::MakeMaker ();
 
 use vars qw{$VERSION $ISCORE @ISA};
 BEGIN {
-	$VERSION = '0.62';
+	$VERSION = '0.64';
 	$ISCORE  = 1;
 	@ISA     = qw{Module::Install::Base};
 }
@@ -175,6 +175,9 @@ sub fix_up_makefile {
     $makefile =~ s/^PERL_LIB = .+/PERL_LIB =/m;
     #$makefile =~ s/^PERL_ARCHLIB = .+/PERL_ARCHLIB =/m;
 
+    # Perl 5.005 mentions PERL_LIB explicitly, so we have to remove that as well.
+    $makefile =~ s/("?)-I\$\(PERL_LIB\)\1//g;
+
     # XXX - This is currently unused; not sure if it breaks other MM-users
     # $makefile =~ s/^pm_to_blib\s+:\s+/pm_to_blib :: /mg;
 
@@ -202,4 +205,4 @@ sub postamble {
 
 __END__
 
-#line 331
+#line 334

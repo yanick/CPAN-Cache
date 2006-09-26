@@ -3,11 +3,11 @@ no_index:
   directory: 
     - inc
     - t
-generated_by: Module::Install version 0.62
+generated_by: Module::Install version 0.64
 distribution_type: module
-version: 0.01
+version: 0.02
 name: CPAN-Cache
-author: Adam Kennedy <cpan@ali.as>
+author: Adam Kennedy <adamk@cpan.org>
 license: perl
 build_requires: 
   Test::More: 0.47
@@ -22,4 +22,4 @@ requires:
   Params::Util: 0.10
   File::Path: 0
   LWP::Simple: 0
-abstract: Locally-stored logical subset of a CPAN mirror
+abstract: Abstract locally-cached logical subset of a CPAN mirror

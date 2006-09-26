@@ -4,7 +4,7 @@ package CPAN::Cache;
 
 =head1 NAME
 
-CPAN::Cache - Locally-stored logical subset of a CPAN mirror
+CPAN::Cache - Abstract locally-cached logical subset of a CPAN mirror
 
 =head1 DESCRIPTION
 
@@ -49,7 +49,7 @@ use LWP::Simple   ();
 
 use vars qw{$VERSION};
 BEGIN {
-	$VERSION = '0.01';
+	$VERSION = '0.02';
 }
 
 
@@ -79,9 +79,11 @@ sub new {
 	$self->{readonly} = !! $self->{readonly};
 
 	# More thorough checking for the 
-	my $uri  = $self->{remote_uri} || 'http://openjsan.org';
-	my $path = $self->{local_dir}  || File::Spec->catdir(
-			File::HomeDir->my_home, '.perl', 'CPAN-Cache'
+	my $uri  = $self->{remote_uri}
+	           || 'http://search.cpan.org/CPAN/';
+	my $path = $self->{local_dir}
+	           || File::Spec->catdir(
+			File::HomeDir->my_data, '.perl', 'CPAN-Cache'
 			);
 
 	# Strip superfluous trailing slashes
@@ -94,7 +96,7 @@ sub new {
 	-w $path or Carp::croak("mirror_local: No write permissions to path '$path'");
 
 	# Create the mirror object and save the updated values
-	$self->{_mirror}    = URI::ToDisk->new( $path => $uri )
+	$self->{_mirror} = URI::ToDisk->new( $path => $uri )
 		or Carp::croak("Unexpected error creating HTML::Location object");
 
 	$self;
@@ -309,7 +311,7 @@ sub static {
 #####################################################################
 # Support Methods
 
-# Validate a JSAN file path
+# Validate a CPAN file path
 sub _path {
 	my $self = shift;
 	my $path = shift or Carp::croak("No CPAN path provided");
@@ -324,6 +326,11 @@ sub _path {
 
 =pod
 
+=head1 TO DO
+
+- Write a proper test suite, not just a compile test
+  (even though this was taken from working JSAN code)
+
 =head1 SUPPORT
 
 Bugs should be reported via the CPAN bug tracker
@@ -334,7 +341,7 @@ For other issues, contact the author.
 
 =head1 AUTHOR
 
-Adam Kennedy E<lt>cpan@ali.asE<gt>
+Adam Kennedy E<lt>adamk@cpan.orgE<gt>
 
 =head1 SEE ALSO
 
@@ -342,7 +349,7 @@ L<CPAN::Index>, L<CPAN::Mini>, L<DBIx::Class>
 
 =head1 COPYRIGHT
 
-Copyright (c) 2006 Adam Kennedy. All rights reserved.
+Copyright 2006 Adam Kennedy.
 
 This program is free software; you can redistribute
 it and/or modify it under the same terms as Perl itself.

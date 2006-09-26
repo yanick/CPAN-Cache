@@ -1,5 +1,5 @@
 NAME
-    CPAN::Cache - Locally-stored logical subset of a CPAN mirror
+    CPAN::Cache - Abstract locally-cached logical subset of a CPAN mirror
 
 DESCRIPTION
     There have been any number of scripts and modules written that contain
@@ -96,6 +96,10 @@ METHODS
     Returns true if the file will never change, false if not, or throws an
     exception on error.
 
+TO DO
+    - Write a proper test suite, not just a compile test (even though this
+    was taken from working JSAN code)
+
 SUPPORT
     Bugs should be reported via the CPAN bug tracker
 
@@ -104,13 +108,13 @@ SUPPORT
     For other issues, contact the author.
 
 AUTHOR
-    Adam Kennedy <cpan@ali.as>
+    Adam Kennedy <adamk@cpan.org>
 
 SEE ALSO
     CPAN::Index, CPAN::Mini, DBIx::Class
 
 COPYRIGHT
-    Copyright (c) 2006 Adam Kennedy. All rights reserved.
+    Copyright 2006 Adam Kennedy.
 
     This program is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.
