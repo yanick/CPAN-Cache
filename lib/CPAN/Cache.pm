@@ -239,7 +239,7 @@ sub mirror {
 	# If any only if a path is "stable" and the file already exists,
 	# it is guarenteed not to change, and we don't have to do the
 	# mirroring operation.
-	if ( $self->_static($path) and -f $file->path ) {
+	if ( $self->static($path) and -f $file->path ) {
 		return $file;
 	}
 
